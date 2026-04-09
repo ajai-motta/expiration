@@ -26,7 +26,7 @@ jobs:
                 project_id: ${{ secrets.GCP_PROJECT_ID }}
             - name: Verify
               run: gcloud projects list
-            - run: kubectl rollout restart deployment expiration-depl
+           
             - name: Get GKE credentials
               run: |
                 gcloud container clusters get-credentials ticketing \
@@ -36,4 +36,4 @@ jobs:
               run: |
                   kubectl config current-context
                   kubectl get nodes
-
+            - run: kubectl rollout restart deployment expiration-depl
