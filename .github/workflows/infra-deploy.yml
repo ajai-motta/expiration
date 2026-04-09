@@ -35,14 +35,12 @@ jobs:
               run: |
                   kubectl config current-context
                   kubectl get nodes
-            - name: Check if deployment exists
-              id: check_deploy
+            - name: Deploy only if not exists
               run: |
-                if kubectl get deployment my-app > /dev/null 2>&1; then
-                  echo "exists=true" >> $GITHUB_OUTPUT
-                else
-                  echo "exists=false" >> $GITHUB_OUTPUT
-                fi
-            - name: Skip deployment
-              if: steps.check_deploy.outputs.exists == 'true'
-              run: echo "Deployment already exists. Skipping..."
+               set -e
+
+               if kubectl get deployment my-app > /dev/null 2>&1; then
+                  echo "Deployment already exists. Skipping..."
+               else
+                  kubectl apply -f k8s/
+               fi
