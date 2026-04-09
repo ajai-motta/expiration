@@ -41,3 +41,4 @@ jobs:
                   kubectl config current-context
                   kubectl get nodes
             - run: kubectl rollout restart deployment expiration-depl
+            
