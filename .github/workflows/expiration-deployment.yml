@@ -27,3 +27,13 @@ jobs:
             - name: Verify
               run: gcloud projects list
             - run: kubectl rollout restart deployment expiration-depl
+            - name: Get GKE credentials
+              run: |
+                gcloud container clusters get-credentials ticketing \
+                 --region ${{ secrets.GCP_REGION }} \
+                  --project ${{ secrets.GCP_PROJECT_ID }}
+            - name: Check context
+              run: |
+                  kubectl config current-context
+                  kubectl get nodes
+
