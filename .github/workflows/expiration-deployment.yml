@@ -20,3 +20,9 @@ jobs:
               with:
                 credentials_json: '${{ secrets.GCS_SECRET }}'
             - run: kubectl rollout restart deployment expiration-depl
+            - name: Setup gcloud
+              uses: google-github-actions/setup-gcloud@v2
+              with:
+                project_id: ${{ secrets.GCP_PROJECT_ID }}
+            - name: Verify
+              run: gcloud projects list
