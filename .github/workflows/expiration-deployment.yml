@@ -1,8 +1,9 @@
 name: deploy-expiration
-on: 
-    push:
-        branches: 
-          - main
+on:
+  workflow_run:
+    workflows: ["deploy"]
+    types:
+      - completed
 jobs:
   build:
 
