@@ -26,6 +26,9 @@ jobs:
                 project_id: ${{ secrets.GCP_PROJECT_ID }}
             - name: Verify
               run: gcloud projects list
+            - name: Install GKE auth plugin
+              run: |
+                   gcloud components install gke-gcloud-auth-plugin --quiet
            
             - name: Get GKE credentials
               run: |
