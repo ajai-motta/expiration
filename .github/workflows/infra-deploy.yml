@@ -39,7 +39,7 @@ jobs:
               run: |
                set -e
 
-               if kubectl get deployment my-app > /dev/null 2>&1; then
+               if kubectl get deployment expiration-depl > /dev/null 2>&1; then
                   echo "Deployment already exists. Skipping..."
                else
                   kubectl apply -f k8s/
